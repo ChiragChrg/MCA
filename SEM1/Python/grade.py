@@ -1,6 +1,7 @@
-# Program to enter 2 student details; Add 3 subjects, find Total & Grade of Student's marks
+# Program to enter 2 student details; 
+# Add 3 subjects, find Total & Grade of Student's marks
 
-N = 1
+N = 2
 student = []
 for i in range(N):
     print("\n---| Student ",i+1," Details |---")
@@ -39,7 +40,7 @@ for i in range(N):
     
 for stud in student:
     print("\nStudent Regno : ",stud['regno'])
-    print("Student Name : ",stud['regno'])
+    print("Student Name : ",stud['name'])
     print("Marks in Subject 1 : ",stud['m1'])
     print("Marks in Subject 2 : ",stud['m2'])
     print("Marks in Subject 3 : ",stud['m3'])
