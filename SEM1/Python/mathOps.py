@@ -2,7 +2,7 @@
 
 import math
 while True:
-    num = int(input("\nEnter a Number : "))
+    num = float(input("\nEnter a Number : "))
 
     print("\n---|Select Operation|---")
     print("1. Square Root")
