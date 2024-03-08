@@ -8,7 +8,9 @@ consonents = []
 
 for i in string:
     for j in vowelsList:
-        if(i.lower() == j):
+        if i == " ":
+            break
+        if i.lower() == j:
             vowel.append(i)
             break
     else:
