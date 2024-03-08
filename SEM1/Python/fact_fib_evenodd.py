@@ -27,12 +27,10 @@ while True:
     
     if ch == 1:
         num = int(input("Enter the number : "))
-        fact = factorial(num)
-        print("Factorial of ", num, " = ", fact)
+        print("Factorial of ", num, " = ", factorial(num))
     elif ch == 2:
         num = int(input("Enter the number : "))
-        fact = fibonacci(num)
-        print("Fibonacci series of range ", num, " = ", fact)
+        print("Fibonacci series of range ", num, " = ", fibonacci(num))
     elif ch == 3:
         num = int(input("Enter the number : "))
         if num % 2 == 0:
