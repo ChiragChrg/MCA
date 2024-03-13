@@ -1,14 +1,14 @@
-// Singly Linked List
+// Circular Linked List
 
 # include <iostream>
 using namespace std;
 
-typedef struct SNODE {
+typedef struct CNODE {
     int data;
-    struct SNODE *ptr;
+    struct CNODE *ptr;
 } NODE;
 
-class SList {
+class CList {
     public:
         NODE *insertBegin(NODE *);
         NODE *insertEnd(NODE *);
@@ -21,7 +21,7 @@ class SList {
 
 int main(){
     int ch, pos;
-    SList SL;
+    CList CL;
     NODE *HEAD = NULL;
 
     while(true){
@@ -34,23 +34,23 @@ int main(){
         cin>>ch;
 
         switch(ch){
-            case 1: HEAD = SL.insertBegin(HEAD);
+            case 1: HEAD = CL.insertBegin(HEAD);
                     break;
-            case 2: HEAD = SL.insertEnd(HEAD);
+            case 2: HEAD = CL.insertEnd(HEAD);
                     break;
             case 3: cout<<"Enter the Position : ";
                     cin>>pos;
-                    HEAD = SL.insertPos(HEAD, pos);
+                    HEAD = CL.insertPos(HEAD, pos);
                     break;
-            case 4: HEAD = SL.deleteBegin(HEAD);
+            case 4: HEAD = CL.deleteBegin(HEAD);
                     break;
-            case 5: HEAD = SL.deleteEnd(HEAD);
+            case 5: HEAD = CL.deleteEnd(HEAD);
                     break;
             case 6: cout<<"Enter the Position : ";
                     cin>>pos;
-                    HEAD = SL.deletePos(HEAD, pos);
+                    HEAD = CL.deletePos(HEAD, pos);
                     break;
-            case 7: SL.display(HEAD);
+            case 7: CL.display(HEAD);
                     break;
             case 8: cout<<"\nExiting program...\n";
                     exit(0);
@@ -60,27 +60,7 @@ int main(){
     }
 }
 
-NODE *SList::insertBegin(NODE *HEAD){
-    int num;
-    NODE *newNode;
-    newNode = (NODE *)malloc(sizeof(NODE));
-
-    cout<<"Enter the Data : ";
-    cin>>num;
-
-    newNode -> data = num;
-    newNode -> ptr = NULL;
-
-    if(HEAD == NULL)
-        HEAD = newNode;
-    else{
-        newNode -> ptr = HEAD;
-        HEAD = newNode;
-    }
-    return HEAD;
-}
-
-NODE *SList::insertEnd(NODE *HEAD){
+NODE *CList::insertBegin(NODE *HEAD){
     int num;
     NODE *newNode, *temp;
     newNode = (NODE *)malloc(sizeof(NODE));
@@ -89,30 +69,58 @@ NODE *SList::insertEnd(NODE *HEAD){
     cin>>num;
 
     newNode -> data = num;
-    newNode -> ptr = NULL;
+    newNode -> ptr = newNode;
 
     if(HEAD == NULL)
         HEAD = newNode;
     else{
         temp = HEAD;
-        while(temp -> ptr != NULL){
+        while(temp -> ptr != HEAD){
             temp = temp -> ptr;
         }
 
         temp -> ptr = newNode;
+        newNode -> ptr = HEAD;
+        HEAD = newNode;
     }
     return HEAD;
 }
 
-NODE *SList::insertPos(NODE *HEAD, int pos){
+NODE *CList::insertEnd(NODE *HEAD){
+    int num;
+    NODE *newNode, *temp;
+    newNode = (NODE *)malloc(sizeof(NODE));
+
+    cout<<"Enter the Data : ";
+    cin>>num;
+
+    newNode -> data = num;
+    newNode -> ptr = newNode;
+
+    if(HEAD == NULL)
+        HEAD = newNode;
+    else{
+        temp = HEAD;
+        while(temp -> ptr != HEAD){
+            temp = temp -> ptr;
+        }
+
+        temp -> ptr = newNode;
+        newNode -> ptr = HEAD;
+    }
+    return HEAD;
+}
+
+NODE *CList::insertPos(NODE *HEAD, int pos){
     int num, i, count = 0;
     NODE *newNode, *temp, *temp1, *temp2;
 
     temp = HEAD;
-    while(temp != NULL){
+    while(temp -> ptr != HEAD){
         count++;
         temp = temp -> ptr;
     }
+    count++;
     
     if(pos > count)
         cout<<"Invalid Position !\n";
@@ -122,12 +130,19 @@ NODE *SList::insertPos(NODE *HEAD, int pos){
 
         newNode = (NODE *)malloc(sizeof(NODE));
         newNode -> data = num;
-        newNode -> ptr = NULL;
+        newNode -> ptr = newNode;
 
         if(pos == 0 && HEAD == NULL)
             HEAD = newNode;
         else if(pos == 0){
+            temp = HEAD;
+            while(temp -> ptr != HEAD){
+                temp1 = temp2;
+                temp2 = temp2 -> ptr;
+            }
+
             newNode -> ptr = HEAD;
+            temp -> ptr = newNode;
             HEAD = newNode;
         }else{
             temp2 = HEAD;
@@ -143,42 +158,57 @@ NODE *SList::insertPos(NODE *HEAD, int pos){
     return HEAD;
 }
 
-NODE *SList :: deleteBegin(NODE * HEAD){
-    NODE *temp;
-
-    if(HEAD == NULL)
-        cout<<"List is Empty !\n";
-    else{
-        temp = HEAD;
-        HEAD = HEAD -> ptr;
-        temp -> ptr = NULL;
-
-        cout<<"Deleted Node : "<<temp -> data<<endl;
-        free(temp);
-    }
-    return HEAD;
-}
-
-NODE *SList :: deleteEnd(NODE * HEAD){
+NODE *CList :: deleteBegin(NODE * HEAD){
     NODE *temp1, *temp2;
 
     if(HEAD == NULL)
         cout<<"List is Empty !\n";
-    else if(HEAD -> ptr == NULL){
-        temp1 = HEAD;
+    else if(HEAD -> ptr == HEAD){
+        temp2 = HEAD;
         HEAD = NULL;
+        temp2 -> ptr = NULL;
+
+        cout<<"Deleted Node : "<<temp2 -> data<<endl;
+        free(temp2);
+    }
+    else{
+        temp1 = temp2 = HEAD;
+        while(temp2 -> ptr != HEAD){
+            temp2 = temp2 -> ptr;
+        }
+
+        HEAD = HEAD -> ptr;
+        temp2 -> ptr = HEAD;
+        temp1 -> ptr = NULL;
 
         cout<<"Deleted Node : "<<temp1 -> data<<endl;
         free(temp1);
     }
-    else{
+    return HEAD;
+}
+
+NODE *CList :: deleteEnd(NODE * HEAD){
+    NODE *temp1, *temp2;
+
+    if(HEAD == NULL)
+        cout<<"List is Empty !\n";
+    else if(HEAD -> ptr == HEAD){
         temp2 = HEAD;
-        while(temp2 -> ptr != NULL){
+        HEAD = NULL;
+        temp2 -> ptr = NULL;
+
+        cout<<"Deleted Node : "<<temp2 -> data<<endl;
+        free(temp2);
+    }
+    else{
+        temp1 = temp2 = HEAD;
+        while(temp2 -> ptr != HEAD){
             temp1 = temp2;
             temp2 = temp2 -> ptr;
         }
 
-        temp1 -> ptr = NULL;
+        temp1 -> ptr = HEAD;
+        temp2 -> ptr = NULL;
 
         cout<<"Deleted Node : "<<temp2 -> data<<endl;
         free(temp2);
@@ -186,23 +216,24 @@ NODE *SList :: deleteEnd(NODE * HEAD){
     return HEAD;
 }
 
-NODE *SList::deletePos(NODE *HEAD, int pos){
+NODE *CList::deletePos(NODE *HEAD, int pos){
     int i, count = 0;
     NODE *temp, *temp1, *temp2;
 
     temp = HEAD;
-    while(temp != NULL){
+    while(temp -> ptr != HEAD){
         count++;
         temp = temp -> ptr;
     }
-    
+    count++;
+
     if(pos >= count)
         cout<<"Invalid Position !\n";
     else{
         temp = HEAD;
         if(HEAD == NULL)
             cout<<"List is Empty !\n";
-        else if(pos == 0 && HEAD -> ptr == NULL){
+        else if(pos == 0 && HEAD -> ptr == HEAD){
             temp = HEAD;
             HEAD = NULL;
 
@@ -210,12 +241,16 @@ NODE *SList::deletePos(NODE *HEAD, int pos){
             free(temp);
         }
         else if(pos == 0){
-            temp = HEAD;
+            temp1 = temp2 = HEAD;
+            while(temp2 -> ptr != HEAD){
+                temp2 = temp2 -> ptr;
+            }
+            
             HEAD = HEAD -> ptr;
-            temp -> ptr = NULL; 
+            temp2 -> ptr = HEAD;
 
-            cout<<"Deleted Node : "<<temp -> data<<endl;
-            free(temp);
+            cout<<"Deleted Node : "<<temp1 -> data<<endl;
+            free(temp1);
         }else{
             temp2 = HEAD;
             for(i=0; i<pos; i++){
@@ -233,14 +268,14 @@ NODE *SList::deletePos(NODE *HEAD, int pos){
     return HEAD;
 }
 
-void SList :: display(NODE * HEAD){
+void CList :: display(NODE * HEAD){
     NODE *temp;
     
     if(HEAD == NULL)
         cout<<"List is Empty!\n";
     else{
         temp = HEAD;
-        while(temp -> ptr != NULL){
+        while(temp -> ptr != HEAD){
             cout<<temp -> data<<" -> ";
             temp = temp -> ptr;
         }
