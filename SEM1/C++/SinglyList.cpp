@@ -199,7 +199,6 @@ NODE *SList::deletePos(NODE *HEAD, int pos){
     if(pos >= count)
         cout<<"Invalid Position !\n";
     else{
-        temp = HEAD;
         if(HEAD == NULL)
             cout<<"List is Empty !\n";
         else if(pos == 0 && HEAD -> ptr == NULL){

@@ -1,4 +1,5 @@
 /SEM1/Python/__pycache__
+.vscode/
+Docs
 
-/SEM1/C++/a.exe
-SEM1/C++/a.exe
+*.exe
