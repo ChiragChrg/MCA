@@ -1,24 +1,25 @@
 # Create class Hierarchy with multi levels of inheritance such as Vehicles.
 # Car and MotorCycles are Vehicle's children. Implement basic functionality.
 
-class Car:
+class Vehicle:
+    def showVehicle(self):
+        print("This is Vehicle")
+        
+class Car(Vehicle):
     def showCar(self):
         print("This is a Car")
 
-class MotorCycle:
-    def showBike(self):
-        print("This is a MotorCycle")
+class Model(Car):
+    def showModel(self):
+        print("This Car is a Ferrari")
         
-class Vehicle (Car, MotorCycle):
-    def showVehicle(self):
-        print("Cars and MotorCycles are Vehicles")
 
-class Hierarchy (Vehicle):
+class Hierarchy(Model):
     def display(self):
-        print("Class Hierarchy inherits Vehicles")
+        print("I have a Ferrari Car")
 
 h = Hierarchy()
-h.showCar()
-h.showBike()
 h.showVehicle()
+h.showCar()
+h.showModel()
 h.display()
