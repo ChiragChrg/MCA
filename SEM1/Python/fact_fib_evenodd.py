@@ -1,4 +1,4 @@
-# Program to find Factorail, Fibonacci series & Even/Odd Checker
+# Program to find Factorial, Fibonacci series & Even/Odd Checker
 
 def factorial(N):
     total = 1
