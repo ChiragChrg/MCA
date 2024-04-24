@@ -1,51 +1,118 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class Stk{
-    int arr[10],top =-1;
-    
-    public:
-    void insert_stack(int num){
-        if(top == 9){
-            cout<<"Stack is full"<<endl;
-        }else{
-            top++;
-            arr[top] = num;
-            
-        }
+
+typedef struct NODE {
+    int data;
+    struct NODE* left;
+    struct NODE* right;
+} BSTree;
+
+BSTree* root;
+BSTree* newnode, * cur, * ptr;
+
+void insert() {
+    int item, num;
+    newnode = (BSTree*)malloc(sizeof(BSTree));
+    cout << "Enter the element to insert:" << endl;
+    cin >> num;
+    newnode->data = num;
+    item = newnode->data;
+    newnode->left = NULL;
+    newnode->right = NULL;
+    if (root == NULL) {
+        root = newnode;
     }
-    
-    void display(){
-        if(top == -1){
-            cout<<"Stack is Empty"<<endl;
-        }else{
-            for(int i = top;i>=0;i--){
-                cout<<arr[i];
+    else {
+        cur = root;
+        while (cur != NULL) {
+            ptr = cur;
+            if (item >= cur->data) {
+                cur = cur->right;
+            }
+            else {
+                cur = cur->left;
             }
         }
+        if (ptr->data <= item) {
+            ptr->right = newnode;
+        }
+        else {
+            ptr->left = newnode;
+        }
     }
-};
+}
 
-int main(){
-    Stk s;
-    int num,i=0,val,len;
-    cout<<"Enter a Number to find the binary value of it : ";
-    cin>>num;
-    val = num;
-    // cout<<(num%2)<<endl;
-    // cout<<(num/2)<<endl;
-    // num = num/2;
-    // cout<<(num/2)<<endl;
-    // cout<<(num%2);
-    
-    while(num/2 != 1){
-        int temp=(num%2);
-        s.insert_stack(temp);
-        num = (num/2);
+void inorder(BSTree* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
     }
-        s.insert_stack(num%2);
-        s.insert_stack(num/2);
-        
-    s.display();
-    
+}
+
+void preorder(BSTree* root) {
+    if (root != NULL) {
+        cout << root->data << " ";
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+void postorder(BSTree* root) {
+    if (root != NULL) {
+        postorder(root->left);
+        postorder(root->right);
+        cout << root->data << " ";
+    }
+}
+
+void display(BSTree* newnode, int level) {
+    int i;
+    if (newnode != NULL) {
+        display(newnode->right, level + 1);
+        for (i = 0; i < level; i++) {
+            cout << "    ";
+        }
+        cout << newnode->data << endl;
+        display(newnode->left, level + 1);
+    }
+}
+
+int main() {
+    int ch, level = 1;
+    while (1) {
+        cout << "\n MENU" << endl;
+        cout << "1.Insert\n";
+        cout << "2.Inorder\n";
+        cout << "3.Preorder\n";
+        cout << "4.Postorder\n";
+        cout << "5.Display\n";
+        cout << "6.Exit\n";
+        cout << "Enter your choice:" << endl;
+        cin >> ch;
+        switch (ch) {
+        case 1:
+            insert();
+            break;
+        case 2:
+            inorder(root);
+            cout << endl;
+            break;
+        case 3:
+            preorder(root);
+            cout << endl;
+            break;
+        case 4:
+            postorder(root);
+            cout << endl;
+            break;
+        case 5:
+            cout << "_____________________________________\n";
+            display(root, level);
+            break;
+        case 6:
+            exit(0);
+        }
+    }
     return 0;
 }
