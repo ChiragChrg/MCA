@@ -4,7 +4,6 @@
 using namespace std;
 
 class Evaluate {
-    char postfix[MAX];
     int top, val, stk[MAX];
 
     public:
@@ -13,33 +12,33 @@ class Evaluate {
             val = 0;
         }
 
-        void read(){
-            cout<<"\nEnter the Infix expression : ";
-            cin>>postfix;
-        }
-
         void push(int num){
             if(top+1 == MAX){
                 cout<<"\nStack Full!";
                 return;
             }
-            stk[top++] = num;
+            top++;
+            stk[top] = num;
         }
 
-        char pop(){
-            if(top!= -1)
-                return stk[top--];
-            else
-                return -1;
+        int pop(){
+            if(top == -1) return 0;
+
+            int val = stk[top];
+            top--;
+            // cout<<"POPPED : "<<val<<" from "<<top<<endl;
+            return val;
         }
 
-        int convert(){
+        int convert(char postfix[]){
             int i = 0;
 
             while(postfix[i] != '\0'){
-                if(postfix[i] >= '0' && postfix[i] <= '9')
+                if(postfix[i] >= '0' && postfix[i] <= '9'){
+                    // cout<<"EXP : "<<postfix[i]<<endl;
                     push(postfix[i] - '0');
-                else{
+                }else{
+                    // cout<<"OP : "<<postfix[i]<<endl;
                     int v = evalOP(postfix[i]);
                     push(v);
                 }
@@ -51,9 +50,9 @@ class Evaluate {
         }
 
         int evalOP(char op){
-            int num2 = pop();
             int num1 = pop();
-            cout<<num1<<" "<<op<<" "<<num2<<endl;
+            int num2 = pop();
+            // cout<<num1<<" "<<op<<" "<<num2<<endl;
             switch(op){
                 case '+': return num1 + num2;
                 case '-': return num1 - num2;
@@ -67,9 +66,12 @@ class Evaluate {
 int main(){
     Evaluate E;
     int result;
+    char postfix[MAX];
 
-    E.read();
-    result = E.convert();
+    cout<<"\nEnter the Infix expression : ";
+    cin>>postfix;
+
+    result = E.convert(postfix);
     cout<<"Result of Postfix evaluation is : "<<result;
 
     return 0;
