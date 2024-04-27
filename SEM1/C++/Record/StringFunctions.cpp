@@ -20,12 +20,8 @@ int main(){
 
     while(true){
         cout<<"\n---MENU---";
-        cout<<"\n1. Concatenate strings";
-        cout<<"\n2. Reverse string";
-        cout<<"\n3. Compare strings";
-        cout<<"\n4. Extract string";
-        cout<<"\n5. Check if string exists";
-        cout<<"\n6.Exit\n";
+        cout<<"\n1. Concatenate strings \n2. Reverse string \n3. Compare strings";
+        cout<<"\n4. Extract string \n5. Check if string exists \n6. Exit\n";
 
         cout<<"\nEnter your Choice : ";
         cin>>ch;
@@ -87,7 +83,7 @@ void concatenate(char str1[10], char str2[10]){
 
     result[i + j] = '\0';
 
-    cout<<"Concatenated String is :"<<result<<endl;
+    cout<<"Concatenated String is : "<<result<<endl;
 }
 
 void reverse(char str[10]){
@@ -132,12 +128,29 @@ void extract(char str1[10], int start, int count){
 }
 
 void isExists(char main[10], char sub[10]){
-    int i, j, flag = 0;
+    int i, j, flag = -1;
+    i=j=0;
 
-    
+    while(main[i] != '\0'){
+        if(main[i] == sub[j]){
+            int temp = i;
+            while(sub[j] != '\0' && main[i] == sub[j]){
+                i++;
+                j++;
+            }
+
+            if(sub[j] == '\0') 
+                flag = temp;
+            
+            i = temp + 1;
+            j = 0;
+        }
+        else
+            i++;
+    }
 
     if(flag == -1)
         cout<<sub<<" does not exist in "<<main<<endl;
     else
-        cout<<sub<<" exists in "<<main<<endl;
+        cout<<sub<<" exists in "<<main<<" at position : "<<flag<<endl;
 }
