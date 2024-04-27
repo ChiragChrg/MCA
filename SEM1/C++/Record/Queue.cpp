@@ -1,14 +1,12 @@
-/* Program to Convert Decimal numbers to Binary using CPP */
-
 # include <iostream>
 # define MAX 5
 using namespace std;
 
-class CQueue {
-  int front,rear, CQ[MAX];
+class Queue {
+  int front, rear, Q[MAX];
 
   public:
-    CQueue(){
+    Queue(){
         front = -1;
         rear = -1;
     }
@@ -19,7 +17,7 @@ class CQueue {
 
 int main()
 {
-    CQueue c;
+    Queue q;
     int ch;
 
     while(true){
@@ -31,13 +29,13 @@ int main()
         switch (ch)
         {
             case 1:
-                c.insert();
+                q.insert();
                 break;
             case 2:
-                c.remove();
+                q.remove();
                 break;
             case 3:
-                c.display();
+                q.display();
                 break;
             case 4:
                 cout<<"Exiting program...";
@@ -51,28 +49,28 @@ int main()
     return 0;
 }
 
-void CQueue :: insert(){
+void Queue :: insert(){
     int num;
-    if((rear + 1) % MAX == front)
-        cout<<"\nCircular Queue is Full..!";
+    if(rear == MAX - 1)
+        cout<<"\nQueue is Full..!";
     else{
         cout<<"Enter the number : ";
         cin>>num;
 
-        rear = (rear + 1) % MAX;
-        CQ[rear] = num;
+        rear = rear + 1;
+        Q[rear] = num;
 
         if(front == -1)
             front = 0;
     }
 }
 
-void CQueue :: remove(){
+void Queue :: remove(){
     int num;
     if(front == -1)
-        cout<<"\nCircular Queue is Empty..!";
+        cout<<"\nQueue is Empty..!";
     else{
-        num = CQ[front];
+        num = Q[front];
         
         if(front == rear)
             front = rear = -1;
@@ -83,11 +81,11 @@ void CQueue :: remove(){
     }
 }
 
-void CQueue :: display(){
+void Queue :: display(){
     if(front == -1)
-        cout<<"\nCircular Queue is Empty..!";
+        cout<<"\nQueue is Empty..!";
     else{
         for(int i=front; i<=rear; i++)
-            cout<<CQ[i]<<endl;
+            cout<<Q[i]<<endl;
     }
 }
