@@ -87,13 +87,23 @@ void concatenate(char str1[10], char str2[10]){
 }
 
 void reverse(char str[10]){
-    int i, len;
-    for(len=0; str[len]!= '\0'; len++);
+    int i, j;
+    char temp;
 
-    for(i=len-1; i>=0; i--)
-        cout << str[i]<<" ";
+    for(i=0; str[i]!= '\0'; i++);
 
-    cout<<endl;
+    i = i-1;
+    j = 0;
+
+    while(i>j){
+        temp = str[j];
+        str[j] = str[i];
+        str[i] = temp;
+        j++;
+        i--;
+    }
+
+    cout<<"Reversed String is: "<<str;
 }
 
 void compare(char str1[10], char str2[10]){
