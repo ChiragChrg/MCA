@@ -13,7 +13,7 @@ public class Reverse_Client {
             // Naming.lookup the same String defined in Naming.rebind() method in
             // <Server>.java
             Reverse_Interface StringReverse = (Reverse_Interface) Naming.lookup("reverseStr");
-            String result = StringReverse.reverse(str); // Calling function in <Impl>.java, returns Boolean
+            String result = StringReverse.reverse(str); // Calling function in <Impl>.java
 
             System.out.println("Reverse of " + str + " = " + result);
 
