@@ -40,4 +40,8 @@ denominator <- N * xSD * ySD
 
 correlation <- numerator / denominator
 
+cat("\n Average of X : ", avgX)
+cat("\n Average of Y : ", avgY)
+cat("\n Standard Deviation of X : ", xSD)
+cat("\n Standard Deviation of Y : ", ySD)
 cat("\n Correlation Coefficent : ", correlation)

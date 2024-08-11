@@ -24,4 +24,6 @@ for (i in 1:N){
 
 covariance <- sum / N
 
+cat("\n Average of X : ", avgX)
+cat("\n Average of Y : ", avgY)
 cat("\n Covariance : ", covariance)

@@ -29,5 +29,7 @@ B <- numerator / denominator
 # Applying formula for A
 A <- avgY - (B * avgX)
 
+cat("\n Average of X : ", avgX)
+cat("\n Average of Y : ", avgY)
 cat("\n Linear Regression : ")
 cat("\n Y = ", A ,"+", B ,"X")
