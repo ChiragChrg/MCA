@@ -2,8 +2,7 @@ age = c()
 n = as.integer(readline('Enter the Range :'))
 
 for(i in 1:n){
-  cat("Enter age", i, ": ")
-  age[i] = as.integer(readline())
+  age[i] <- as.integer(readline(paste("Enter age", i, ": ")))
 }
 
 min = age[1]

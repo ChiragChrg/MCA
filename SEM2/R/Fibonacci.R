@@ -3,7 +3,6 @@ getFibonacci = function(n){
   
   n1 = 0
   n2 = 1
-  temp = 0
   
   for (i in 2:n){
     temp = n1 + n2
