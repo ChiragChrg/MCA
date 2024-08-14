@@ -1,0 +1,97 @@
+<!-- XML Database Program -->
+
+<?xml version="1.0" ?>
+<!DOCTYPE studentlist[ 
+    <!ELEMENT studentlist (student+)>
+    <!ELEMENT student (name,regno,course,add,phno)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT regno (#PCDATA)>
+    <!ELEMENT course (#PCDATA)>
+    <!ELEMENT add (padd,tadd)>
+    <!ELEMENT padd (#PCDATA)>
+    <!ELEMENT tadd (#PCDATA)>
+    <!ELEMENT phno (mobile,landline)>
+    <!ELEMENT mobile (#PCDATA)>
+    <!ELEMENT landline (#PCDATA)>
+]>
+
+<studentlist>
+    <student>
+        <name>Anvith</name>
+        <regno>2317069</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd>Perla</tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+    <student>
+        <name>Aby Sunny</name>
+        <regno>2317061</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd>Kanhangad</tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+    <student>
+        <name>Stephen</name>
+        <regno>2317104</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd></tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+    <student>
+        <name>Sharath</name>
+        <regno>2317102</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd>Kottara</tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+    <student>
+        <name>Suramya</name>
+        <regno>2317107</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd>Sullia</tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+    <student>
+        <name>Chirag</name>
+        <regno>2317075</regno>
+        <course>MCA</course>
+        <add>
+            <padd>Mangalore</padd>
+            <tadd>Vamanjoor</tadd>
+        </add>
+        <phno>
+            <mobile>7907609121</mobile>
+            <landline>0823-235466</landline>
+        </phno>
+    </student>
+</studentlist>
