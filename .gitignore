@@ -1,6 +1,13 @@
 /SEM1/Python/__pycache__
 .vscode/
+
 Docs
+/SEM2/Paper Review
+/SEM2/SE
+/SEM2/IP
+/SEM2/DM
+/SEM2/CC/Certificates
+/SEM2/BCP
 
 *.exe
 *.class
@@ -12,6 +19,7 @@ Docs
 *.mp3
 *.ogg
 *.zip
+*.jpg
 
 Chirag AIMIT ID.jpg
 
