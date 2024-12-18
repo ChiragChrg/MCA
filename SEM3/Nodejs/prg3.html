@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age and Table Generator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ccc;
+            margin: 0;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            background-color: dodgerblue;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .result {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function calAgeInDays() {
+            var dobdate = new Date(document.forms["f1"]["t1"].value);
+            var currdate = new Date();
+            var diff = (currdate.getTime() - dobdate.getTime()) / (24 * 60 * 60 * 1000);
+            f1.res.value = diff;
+        }
+
+        function calAge() {
+            var dobdate = new Date(f1.t1.value);
+            var dobyear = dobdate.getFullYear();
+            var dobmonth = dobdate.getMonth();
+            var dobday = dobdate.getDate();
+
+            var currdate = new Date();
+            var curryear = currdate.getFullYear();
+            var currmonth = currdate.getMonth();
+            var currday = currdate.getDate();
+
+            var year = curryear - dobyear;
+            var month = currmonth - dobmonth;
+            var day = currday - dobday;
+
+            if (day < 0) {
+                if ((curryear % 4 == 0) && (currmonth == 1)) {
+                    day += 29;
+                } else {
+                    day += 30;
+                    month -= 1;
+                }
+            }
+            if (month < 0) {
+                month += 12;
+                year -= 1;
+            }
+            if (currdate < dobdate) {
+                alert("Invalid DOB");
+            } else {
+                f1.res.value = (year + " years " + month + " months " + day + " days");
+            }
+        }
+
+        function calmonths() {
+            var dobdate = new Date(f1.t1.value);
+            var dobyear = dobdate.getFullYear();
+            var dobmonth = dobdate.getMonth();
+            var dobday = dobdate.getDate();
+
+            var currdate = new Date();
+            var curryear = currdate.getFullYear();
+            var currmonth = currdate.getMonth();
+            var currday = currdate.getDate();
+
+            var year = curryear - dobyear;
+            var month = currmonth - dobmonth;
+            var day = currday - dobday;
+
+            if (day < 0) {
+                if ((curryear % 4 == 0) && (currmonth == 1)) {
+                    day += 29;
+                } else {
+                    day += 30;
+                    month -= 1;
+                }
+            }
+            if (month < 0) {
+                month += 12;
+                year -= 1;
+            }
+            if (currdate < dobdate) {
+                alert("Invalid DOB");
+            } else {
+                f1.res.value = (year * 12 + month + " months");
+            }
+        }
+
+        function addDaysToDOB() {
+            var dob = new Date(document.forms["f1"]["t1"].value);
+            var daysToAdd = parseInt(document.forms["f1"]["daysToAdd"].value);
+
+            if (isNaN(daysToAdd) || daysToAdd < 0) {
+                alert("Please enter a valid number of days to add.");
+                return;
+            }
+
+            dob.setDate(dob.getDate() + daysToAdd); // Adds the days to DOB
+            var newDate = dob.toDateString(); // Format the resulting date
+
+            document.forms["f1"]["res"].value = `New Date: ${newDate}`;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="f1">
+        <h1>Age Calculator</h1>
+        <label>Enter your DOB (MM/DD/YYYY):</label>
+        <input type="text" name="t1" placeholder="MM/DD/YYYY" />
+        <label>Result:</label>
+        <input type="text" name="res" class="result" readonly />
+        <input type="button" value="Age in Days" onclick="calAgeInDays()" />
+        <input type="button" value="Year, Month, Days" onclick="calAge()" />
+        <input type="button" value="Age in Months" onclick="calmonths()" />
+        <label>Days to Add:</label>
+        <input type="text" name="daysToAdd" placeholder="Enter days" />
+        <input type="button" value="Add Days to DOB" onclick="addDaysToDOB()" />
+    </form>
+    </form>
+</body>
+
+</html>

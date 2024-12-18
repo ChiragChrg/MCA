@@ -1,0 +1,187 @@
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .display {
+            width: 90%;
+            padding: 15px;
+            font-size: 2em;
+            text-align: right;
+            background-color: #f4f4f4;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            padding: 20px;
+            font-size: 1.5em;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ddd;
+        }
+
+        .button.operation {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .button.clear {
+            background-color: #ccc;
+            color: white;
+        }
+
+        .button.equal {
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .button.memory {
+            background-color: rgb(128, 192, 255);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled value="0">
+        <div class="button-container">
+            <button class="button memory" onclick="clearMemory()">MC</button>
+            <button class="button memory" onclick="recallMemory()">MR</button>
+            <button class="button memory" onclick="addToMemory()">M+</button>
+            <button class="button memory" onclick="subtractFromMemory()">M-</button>
+
+            <button class="button" onclick="appendToDisplay('%')">%</button>
+            <button class="button" onclick="clearEntry()">CE</button>
+            <button class="button clear" onclick="clearDisplay()">C</button>
+            <button class="button" onclick="appendToDisplay('√')">√</button>
+
+            <button class="button" onclick="appendToDisplay('1/x')">1/x</button>
+            <button class="button" onclick="appendToDisplay('x²')">x²</button>
+            <button class="button" onclick="appendToDisplay('²√x')">²√x</button>
+            <button class="button operation" onclick="appendToDisplay('/')">÷</button>
+
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="button operation" onclick="appendToDisplay('*')">×</button>
+
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="button operation" onclick="appendToDisplay('-')">−</button>
+
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="button operation" onclick="appendToDisplay('+')">+</button>
+
+            <button class="button" onclick="appendToDisplay('+/-')">+/-</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="button" onclick="appendToDisplay('.')">.</button>
+            <button class="button equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let memory = 0;
+
+        function appendToDisplay(value) {
+            let display = document.getElementById("display");
+            if (display.value === "0" || display.value === "Error") {
+                display.value = value;
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "0";
+        }
+
+        function clearEntry() {
+            let display = document.getElementById("display");
+            display.value = display.value.slice(0, -1);
+            if (display.value === "") {
+                display.value = "0";
+            }
+        }
+
+        function calculate() {
+            let display = document.getElementById("display");
+            try {
+                let result = eval(display.value.replace("√", "Math.sqrt").replace("x²", "**2").replace("1/x", "(1/"));
+                if (!isFinite(result)) {
+                    throw "Error";
+                }
+                display.value = result;
+            } catch (e) {
+                display.value = "Error";
+            }
+        }
+
+        function clearMemory() {
+            memory = 0;
+        }
+
+        function recallMemory() {
+            document.getElementById("display").value = memory;
+        }
+
+        function addToMemory() {
+            memory += parseFloat(document.getElementById("display").value);
+        }
+
+        function subtractFromMemory() {
+            memory -= parseFloat(document.getElementById("display").value);
+        }
+
+        // Additional functions for advanced operations
+        function handleAdvancedOperations(value) {
+            let display = document.getElementById("display");
+            let currentValue = display.value;
+            if (value === "√") {
+                display.value = Math.sqrt(currentValue);
+            } else if (value === "x²") {
+                display.value = Math.pow(currentValue, 2);
+            } else if (value === "²√x") {
+                display.value = Math.pow(currentValue, 1 / 2);
+            }
+        }
+    </script>
+</body>
+
+</html>

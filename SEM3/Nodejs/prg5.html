@@ -1,0 +1,213 @@
+<html>
+
+<head>
+    <title>JavaScript Utility Programs</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buttonContainer {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        button {
+            padding: 1.4em 2em;
+            margin: 5px;
+            border: none;
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            width: 400px;
+            margin-inline: auto;
+            font-size: 1.1em;
+            color: #555;
+            padding: 1em;
+            border: 1px solid dodgerblue;
+            border-radius: 0.4em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JavaScript Utility Programs</h1>
+
+    <input type="text" id="inputValue" placeholder="Enter a number or string"><br>
+
+    <div class="buttonContainer">
+        <button onclick="checkPrime()">Check Prime</button>
+        <button onclick="generateNPrimes()">Generate N Primes</button>
+        <button onclick="generateFibonacci()">Generate Fibonacci</button>
+        <button onclick="checkArmstrong()">Check Armstrong</button>
+        <button onclick="sumFirstNNumbers()">Sum of First N Numbers</button>
+        <button onclick="countVowels()">Count Vowels</button>
+        <button onclick="checkPalindromeNumber()">Check Palindrome Number</button>
+        <button onclick="checkPalindromeString()">Check Palindrome String</button>
+        <button onclick="deleteDuplicateChars()">Delete Duplicate Chars</button>
+        <button onclick="deleteRepeatedChars()">Delete Repeated Chars</button>
+        <button onclick="deleteSpecialChars()">Delete Special Chars</button>
+        <button onclick="multiplyByFive()">Multiply by 5</button>
+        <button onclick="deleteEvenNumbers()">Delete Even Numbers</button>
+        <button onclick="deleteOddNumbers()">Delete Odd Numbers</button>
+    </div>
+
+    <p id="result"></p>
+
+    <script>
+        // Prime Number Checker
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function checkPrime() {
+            const number = parseInt(document.getElementById("inputValue").value);
+            const result = isPrime(number) ? `${number} is a prime number.` : `${number} is not a prime number.`;
+            document.getElementById("result").textContent = result;
+        }
+
+        // Generate First N Prime Numbers
+        function generateNPrimes() {
+            let n = parseInt(document.getElementById("inputValue").value);
+            let primes = [];
+            let num = 2;
+            while (primes.length < n) {
+                if (isPrime(num)) {
+                    primes.push(num);
+                }
+                num++;
+            }
+            document.getElementById("result").textContent = "First " + n + " prime numbers: " + primes.join(", ");
+        }
+
+        // Generate First N Fibonacci Numbers
+        function generateFibonacci() {
+            let n = parseInt(document.getElementById("inputValue").value);
+            let fib = [0, 1];
+            for (let i = 2; i < n; i++) {
+                fib.push(fib[i - 1] + fib[i - 2]);
+            }
+            document.getElementById("result").textContent = "First " + n + " Fibonacci numbers: " + fib.slice(0, n).join(", ");
+        }
+
+        // Check Armstrong Number
+        function isArmstrong(num) {
+            let sum = 0;
+            let temp = num;
+            let digits = num.toString().length;
+            while (temp > 0) {
+                let remainder = temp % 10;
+                sum += Math.pow(remainder, digits);
+                temp = Math.floor(temp / 10);
+            }
+            return sum === num;
+        }
+
+        function checkArmstrong() {
+            const num = parseInt(document.getElementById("inputValue").value);
+            const result = isArmstrong(num) ? `${num} is an Armstrong number.` : `${num} is not an Armstrong number.`;
+            document.getElementById("result").textContent = result;
+        }
+
+        // Sum of First N Numbers
+        function sumFirstNNumbers() {
+            let n = parseInt(document.getElementById("inputValue").value);
+            let sum = (n * (n + 1)) / 2;
+            document.getElementById("result").textContent = "Sum of first " + n + " numbers is: " + sum;
+        }
+
+        // Count Vowels
+        function countVowels() {
+            let str = document.getElementById("inputValue").value.toLowerCase();
+            let vowels = str.match(/[aeiou]/g);
+            let count = vowels ? vowels.length : 0;
+            document.getElementById("result").textContent = "Number of vowels: " + count;
+        }
+
+        // Check if Number is Palindrome
+        function checkPalindromeNumber() {
+            let num = document.getElementById("inputValue").value;
+            let reversed = num.split('').reverse().join('');
+            let result = (num === reversed) ? `${num} is a palindrome.` : `${num} is not a palindrome.`;
+            document.getElementById("result").textContent = result;
+        }
+
+        // Check if String is Palindrome
+        function checkPalindromeString() {
+            let str = document.getElementById("inputValue").value;
+            let reversed = str.split('').reverse().join('');
+            let result = (str === reversed) ? `"${str}" is a palindrome.` : `"${str}" is not a palindrome.`;
+            document.getElementById("result").textContent = result;
+        }
+
+        // Delete Duplicate Characters in String
+        function deleteDuplicateChars() {
+            let str = document.getElementById("inputValue").value;
+            let result = Array.from(new Set(str)).join('');
+            document.getElementById("result").textContent = "String without duplicates: " + result;
+        }
+
+        // Delete Repeated Characters in String
+        function deleteRepeatedChars() {
+            let str = document.getElementById("inputValue").value;
+            let charCount = {};
+            for (let char of str) {
+                charCount[char] = (charCount[char] || 0) + 1;
+            }
+            let result = str.split('').filter(char => charCount[char] === 1).join('');
+            document.getElementById("result").textContent = "String without repeated chars: " + result;
+        }
+
+        // Delete Special Characters in String
+        function deleteSpecialChars() {
+            let str = document.getElementById("inputValue").value;
+            let result = str.replace(/[^a-zA-Z0-9]/g, '');
+            document.getElementById("result").textContent = "String without special characters: " + result;
+        }
+
+        // Multiply Sequence by 5
+        function multiplyByFive() {
+            let nums = document.getElementById("inputValue").value.split(',').map(Number);
+            let result = nums.map(num => num * 5).join(", ");
+            document.getElementById("result").textContent = "Multiplied by 5: " + result;
+        }
+
+        // Delete Even Numbers
+        function deleteEvenNumbers() {
+            let nums = document.getElementById("inputValue").value.split(',').map(Number);
+            let result = nums.filter(num => num % 2 !== 0).join(", "); // Keeps odd numbers
+            document.getElementById("result").textContent = "Odd numbers only: " + result;
+        }
+
+        // Delete Odd Numbers
+        function deleteOddNumbers() {
+            let nums = document.getElementById("inputValue").value.split(',').map(Number);
+            let result = nums.filter(num => num % 2 === 0).join(", "); // Keeps even numbers
+            document.getElementById("result").textContent = "Even numbers only: " + result;
+        }
+    </script>
+</body>
+
+</html>

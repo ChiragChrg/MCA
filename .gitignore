@@ -9,10 +9,22 @@ Docs
 /SEM2/CC/Certificates
 /SEM2/BCP
 
+/SEM3/Events
+/SEM3/BCP
+/SEM3/BDA
+/SEM3/Hadoop
+/SEM3/IOT
+/SEM3/MongoDB
+/SEM3/CSharp
+/SEM3/Machine Learning/.ipynb_checkpoints
+/SEM3/Research SIG
+
+
 *.exe
 *.class
 *.pdf
 *.docx
+*.doc
 *.ppt
 *.pptx
 *.png

@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <title>Ceizer Cipher</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgba(30, 143, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: dodgerblue;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input[type="button"] {
+            width: 100%;
+            padding: 10px;
+            background-color: dodgerblue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function encrypt() {
+            var pt = (f1.fl.value).toLowerCase();
+            var key = parseInt(f1.key.value);
+            var alphabets = "abcdefghijklmnopqrstuvwxyz";
+            var ct = "";
+            for (var i = 0; i < pt.length; i++) {
+                if (alphabets.indexOf(pt.charAt(i)) !== -1) {
+                    ct = ct + alphabets.charAt((alphabets.indexOf(pt.charAt(i)) + key) % 26);
+                } else {
+                    ct = ct + pt.charAt(i); // Handle spaces and non-alphabetic characters
+                }
+            }
+            f1.result.value = ct;
+        }
+
+        function decrypt() {
+            var pt = (f1.fl.value).toLowerCase();
+            var key = parseInt(f1.key.value);
+            var alphabets = "abcdefghijklmnopqrstuvwxyz";
+            var ct = "";
+            for (var i = 0; i < pt.length; i++) {
+                if (alphabets.indexOf(pt.charAt(i)) !== -1) {
+                    ct = ct + alphabets.charAt((alphabets.indexOf(pt.charAt(i)) - key + 26) % 26);
+                } else {
+                    ct = ct + pt.charAt(i); // Handle spaces and non-alphabetic characters
+                }
+            }
+            f1.result.value = ct;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="f1">
+        <h1>Ceizer Cipher Encryption/Decryption</h1>
+
+        <label for="fl">Enter plain text/cipher text:</label>
+        <input type="text" name="fl" id="fl" />
+
+        <label for="key">Enter key [0-25]:</label>
+        <input type="text" name="key" id="key" />
+
+        <label for="result">Result:</label>
+        <input type="text" name="result" id="result" disabled />
+
+        <input type="button" value="Encrypt" onclick="encrypt()" />
+        <input type="button" value="Decrypt" onclick="decrypt()" />
+    </form>
+</body>
+
+</html>

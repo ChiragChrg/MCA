@@ -1,0 +1,148 @@
+<html>
+
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .inputContainer {
+            margin-bottom: 1rem;
+        }
+
+        .inputContainer label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .inputContainer input[type="text"],
+        .inputContainer input[type="password"],
+        .inputContainer input[type="email"],
+        .inputContainer select,
+        .inputContainer textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .inputContainer input:focus,
+        .inputContainer select:focus,
+        .inputContainer textarea:focus {
+            outline: none;
+            border-color: dodgerblue;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .inputContainer textarea {
+            resize: vertical;
+            height: 80px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: dodgerblue;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form>
+            <div class="inputContainer">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="inputContainer">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="inputContainer">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="inputContainer">
+                <label>Gender</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="other" required>
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            <div class="inputContainer">
+                <label>Hobbies</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="sports" name="hobbies" value="sports">
+                    <label for="sports">Sports</label>
+                    <input type="checkbox" id="music" name="hobbies" value="music">
+                    <label for="music">Music</label>
+                    <input type="checkbox" id="reading" name="hobbies" value="reading">
+                    <label for="reading">Gaming</label>
+                </div>
+            </div>
+            <div class="inputContainer">
+                <label for="file">Upload File</label>
+                <input type="file" id="file" name="file">
+            </div>
+            <div class="inputContainer">
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+                    <option value="usa">United States</option>
+                    <option value="canada">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="india">India</option>
+                    <!-- Add more countries as needed -->
+                </select>
+            </div>
+            <div class="inputContainer">
+                <label for="bio">Short Bio</label>
+                <textarea id="bio" name="bio" placeholder="Tell us something about yourself..."></textarea>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+</body>
+
+</html>

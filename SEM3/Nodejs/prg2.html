@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <style>
+        h1 {
+            margin-left: 10em;
+        }
+
+        table {
+            /* width: 100%; */
+            border-collapse: collapse;
+            margin: 0 10em;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        th {
+            background-color: dodgerblue;
+            color: white;
+        }
+    </style>
+    <script>
+        function genTable(rows, cols) {
+            var table = "<table border='1'>";
+            table += "<tr>";
+            for (var j = 1; j <= cols; j++) {
+                table += "<th>Multiplication of " + j + "</th>";
+            }
+            table += "</tr>";
+
+            for (var i = 1; i <= rows; i++) {
+                table += "<tr>";
+                for (var j = 1; j <= cols; j++) {
+                    table += "<td>" + j + " * " + i + " = " + (j * i) + "</td>";
+                }
+                table += "</tr>";
+            }
+
+            table += "</table>";
+            document.getElementById("tableContainer").innerHTML = table;
+        }
+
+        function getTableData() {
+            var rows = parseInt(prompt("Enter number of rows"));
+            var cols = parseInt(prompt("Enter number of columns"));
+            if (!rows || rows <= 0) rows = 10;
+            if (!cols || cols <= 0) cols = 10;
+            genTable(rows, cols);
+        }
+    </script>
+</head>
+
+<body onload="getTableData()">
+    <h1> Multiplication Table</h1>
+    <div id="tableContainer"></div>
+</body>
+
+</htm>
