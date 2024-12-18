@@ -33,6 +33,7 @@ denominator <- 0
 
 for (i in 1:N){
   numerator <- numerator + (x[i] * y[i])
+  cat("\n Total Numerator : ", numerator)
 }
 
 numerator <- numerator - (N * avgX * avgY)
